@@ -1,0 +1,9 @@
+<%= form_for @tracker do |f| %>
+    <%= f.label :recipient %>:
+    <%= f.text_field :recipient %><br/>
+
+    <%= f.label :notes %>:
+    <%= f.text_field :notes %><br/>
+
+    <%= f.submit %>
+<% end %>

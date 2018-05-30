@@ -1,0 +1,21 @@
+Recipient: <%= @tracker.recipient %>
+<br/>
+Notes: <%= @tracker.notes %>
+<br/>
+<br/>
+
+This tracker has been viewed: <%= @tracker.view_count %>
+<br/>
+This tracker was last viewed: <%= @tracker.last_viewed %>
+<br/>
+This tracker was created at: <%= @tracker.created_at %>
+<br/>
+<br/>
+
+Add this "image" you email body.
+<pre><%= tracker_link_text(@tracker.uuid) %></pre>
+<div style="background-color: red">
+  <%= tracker_link_img(@tracker.uuid) %>
+</div>
+
+<%= link_to "New", new_tracker_path %>
