@@ -1,3 +1,7 @@
-Look up a tracker: (Coming soon!)
+<ul>
+  <% @trackers.each do |tracker| %>
+    <li><%= link_to tracker.uuid, tracker_path(tracker.uuid) %> - <%= tracker.recipient %> - <%= tracker.created_at %></li>
+  <% end %>
+</ul>
 
 <%= link_to "Create a new tracker", new_tracker_path %>

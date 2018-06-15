@@ -1,6 +1,6 @@
 class TrackersController < ApplicationController
   def index
-
+    @trackers = Tracker.all
   end
 
   def show
@@ -17,16 +17,17 @@ class TrackersController < ApplicationController
   end
 
   def mark
-    # request is coming from this site (ie the show page then dont count a view but do show the sunset)
-    send_file Rails.root.join("public", "sunset+wave.jpg"), type: "image/gif", disposition: "inline"
-
-    # If the image request is coming from another page then do this
-    tracker = Tracker.find_by(uuid: params[:uuid])
-    tracker.view_count += 1
-    tracker.last_viewed = DateTime.now
-    tracker.save
-    head :ok
-
+    if request.referrer.include?(ENV['HOSTED_URL'])
+      # Request is comming from show page
+      send_file Rails.root.join("public", "sunset+wave.jpg"), type: "image/gif", disposition: "inline"
+    else
+      # Request is comming from an external page
+      tracker = Tracker.find_by(uuid: params[:uuid])
+      tracker.view_count += 1
+      tracker.last_viewed = DateTime.now
+      tracker.save
+      head :ok
+    end
   end
 
   private
